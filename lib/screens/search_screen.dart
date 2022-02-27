@@ -92,7 +92,7 @@ class _SearchScreenState extends State<SearchScreen> {
                         Navigator.push(context, MaterialPageRoute(builder: (context)=>ChatScreen(
                           currentUser: widget.user, 
                           friendId: searchResult[index]['uid'], 
-                          friendname: searchResult[index]['name'], 
+                          friendName: searchResult[index]['name'], 
                           friendImage: searchResult[index]['image'])));
                       }, icon: Icon(Icons.message)),
                       );
