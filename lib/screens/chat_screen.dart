@@ -61,7 +61,7 @@ class ChatScreen extends StatelessWidget {
                     physics: BouncingScrollPhysics(),
                     itemBuilder: (context,index){
                       bool isMe = snapshot.data.docs[index]['senderId'] == currentUser.uid;
-                      return SingleMessage(message: snapshot.data.docs['message'], isMe: isMe);
+                      return SingleMessage(message: snapshot.data.docs[index]['message'], isMe: isMe);
                     }
                   );
                 }
