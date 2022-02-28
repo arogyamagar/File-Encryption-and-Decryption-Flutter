@@ -41,8 +41,26 @@ class ChatScreen extends StatelessWidget {
                   Text(friendName, style: TextStyle(fontSize: 20),),
                   SizedBox(height: 2,),
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(0, 0, 89, 0),
-                    child: Text(friendStatus, style: TextStyle(fontSize: 12)),
+                    padding: const EdgeInsets.fromLTRB(0, 0, 50, 0),
+                    child:StreamBuilder<DocumentSnapshot>(
+                      stream: FirebaseFirestore.instance.collection('users').doc(friendId).snapshots(),
+                      builder: (context, AsyncSnapshot snapshot){
+                        if(snapshot.data != null){
+                          return Container(
+                            child: Column(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.fromLTRB(0, 0, 35, 0),
+                                  child: Text(snapshot.data['status'], style: TextStyle(fontSize: 12)),
+                                )
+                              ],
+                            )
+                          );
+                        } else {
+                          return Container();
+                        }
+                      }
+                    )
                   ),
                 ],
               ),
@@ -67,7 +85,7 @@ class ChatScreen extends StatelessWidget {
                 if(snapshot.hasData){
                   if(snapshot.data.docs.length < 1){
                     return Center(
-                      child: Text("Say Hi"),
+                      child: Text("Say Hi", style: TextStyle(fontSize: 20),),
                     );
                   }
                   return ListView.builder(

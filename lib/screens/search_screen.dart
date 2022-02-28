@@ -23,7 +23,8 @@ class _SearchScreenState extends State<SearchScreen> {
       searchResult = [];
       isLoading = true;
     });
-    await FirebaseFirestore.instance.collection("users").where("name",isEqualTo: searchController.text).get().then((value){
+
+    await FirebaseFirestore.instance.collection("users").where("name", isEqualTo: searchController.text).get().then((value){
       if(value.docs.length < 1){
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("No User Found")));
           setState(() {
