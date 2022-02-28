@@ -36,14 +36,7 @@ class _MessageTextFieldState extends State<MessageTextField> {
     String fileName = Uuid().v1();
     int status = 1;
 
-    await FirebaseFirestore.instance
-        .collection('users')
-        .doc(widget.currentId)
-        .collection('messages')
-        .doc(widget.friendId)
-        .collection('chats')
-        .doc(fileName)
-        .set({
+    await FirebaseFirestore.instance.collection('users').doc(widget.currentId).collection('messages').doc(widget.friendId).collection('chats').doc(fileName).set({
       "senderId": widget.currentId,
       "receiverId": widget.friendId,
       "message": "",
@@ -112,6 +105,7 @@ class _MessageTextFieldState extends State<MessageTextField> {
         GestureDetector(
           onTap: ()async{
             String message = _controller.text;
+            if(_controller.text.isNotEmpty){
             _controller.clear();
             await FirebaseFirestore.instance.collection('users').doc(widget.currentId).collection('messages').doc(widget.friendId).collection('chats').add({
               "senderId": widget.currentId,
@@ -136,6 +130,7 @@ class _MessageTextFieldState extends State<MessageTextField> {
                 'last_msg':message,
               });
             });
+            }
           },
           child: Container(
             padding: EdgeInsets.all(8),
