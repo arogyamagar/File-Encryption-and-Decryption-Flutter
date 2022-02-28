@@ -42,6 +42,7 @@ class _MessageTextFieldState extends State<MessageTextField> {
       "message": "",
       "type": "img",
       "date": DateTime.now(),
+      "status": "",
     });
     
     var ref = FirebaseStorage.instance.ref().child('image').child("$fileName.jpg");
@@ -59,6 +60,7 @@ class _MessageTextFieldState extends State<MessageTextField> {
         "message": ImageUrl,
         "type":"img",
         "date": DateTime.now(),
+        "status": "",
       }).then((value){
       FirebaseFirestore.instance.collection('users').doc(widget.currentId).collection('messages').doc(widget.friendId).set({
         'last_msg':ImageUrl,
@@ -71,6 +73,7 @@ class _MessageTextFieldState extends State<MessageTextField> {
         "message": ImageUrl,
         "type":"img",
         "date": DateTime.now(),
+        "status": "",
       }).then((value){
         FirebaseFirestore.instance.collection('users').doc(widget.friendId).collection('messages').doc(widget.currentId).set({
           'last_msg':ImageUrl,
@@ -113,6 +116,7 @@ class _MessageTextFieldState extends State<MessageTextField> {
               "message": message,
               "type":"text",
               "date": DateTime.now(),
+              "status": "",
             }).then((value){
               FirebaseFirestore.instance.collection('users').doc(widget.currentId).collection('messages').doc(widget.friendId).set({
                 'last_msg':message,
@@ -125,6 +129,7 @@ class _MessageTextFieldState extends State<MessageTextField> {
               "message":message,
               "type":"text",
               "date":DateTime.now(),
+              "status": "",
             }).then((value){
               FirebaseFirestore.instance.collection('users').doc(widget.friendId).collection('messages').doc(widget.currentId).set({
                 'last_msg':message,

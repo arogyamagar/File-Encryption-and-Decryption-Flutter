@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:chat_app/screens/chat_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -93,7 +91,8 @@ class _SearchScreenState extends State<SearchScreen> {
                           currentUser: widget.user, 
                           friendId: searchResult[index]['uid'], 
                           friendName: searchResult[index]['name'], 
-                          friendImage: searchResult[index]['image'])));
+                          friendImage: searchResult[index]['image'],
+                          friendStatus: searchResult[index]['status'])));
                       }, icon: Icon(Icons.message)),
                       );
                   }))

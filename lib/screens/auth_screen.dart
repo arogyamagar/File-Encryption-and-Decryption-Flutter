@@ -42,6 +42,7 @@ class _AuthScreenState extends State<AuthScreen> {
       'image':userCredential.user!.photoURL,
       'uid':userCredential.user!.uid,
       'date': DateTime.now(),
+      'status':"",
     });
     }
 

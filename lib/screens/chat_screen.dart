@@ -5,18 +5,19 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class ChatScreen extends StatelessWidget {
-  
+
   final UserModel currentUser;
   final String friendId;
   final String friendName;
   final String friendImage;
+  final String friendStatus;
 
   ChatScreen({
     required this.currentUser,
     required this.friendId,
     required this.friendName,
     required this.friendImage,
-
+    required this.friendStatus,
   });
 
   @override
@@ -25,13 +26,27 @@ class ChatScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.teal,
         title: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          // crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(80),
               child: Image.network(friendImage, height:  35,)
             ),
-            SizedBox(width: 5,),
-            Text(friendName, style: TextStyle(fontSize: 20),)
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                children: [
+                  SizedBox(width: 5,),
+                  Text(friendName, style: TextStyle(fontSize: 20),),
+                  SizedBox(height: 2,),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 0, 89, 0),
+                    child: Text(friendStatus, style: TextStyle(fontSize: 12)),
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),
@@ -69,7 +84,7 @@ class ChatScreen extends StatelessWidget {
                   child: CircularProgressIndicator()
                 );
 
-               
+
               }
               ),
           )),

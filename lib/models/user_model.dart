@@ -6,6 +6,7 @@ class UserModel{
   String image;
   Timestamp date;
   String uid;
+  String status;
 
   UserModel({
     required this.email,
@@ -13,6 +14,7 @@ class UserModel{
     required this.image,
     required this.date,
     required this.uid,
+    required this.status,
 });
 
 factory UserModel.fromJson(DocumentSnapshot snapshot){
@@ -21,7 +23,8 @@ factory UserModel.fromJson(DocumentSnapshot snapshot){
       name: snapshot ['name'], 
         image: snapshot ['image'], 
           date: snapshot ['date'], 
-            uid: snapshot ['uid']
+            uid: snapshot ['uid'],
+              status: snapshot ['status'],
     );
   }
 }

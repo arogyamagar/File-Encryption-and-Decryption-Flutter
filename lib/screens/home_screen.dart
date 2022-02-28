@@ -1,5 +1,6 @@
 import 'package:chat_app/models/user_model.dart';
 import 'package:chat_app/screens/auth_screen.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:chat_app/screens/search_screen.dart';
@@ -14,8 +15,32 @@ class HomeScreen extends StatefulWidget{
   _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver{
+  User? user = FirebaseAuth.instance.currentUser;
   @override
+
+  void initState(){
+    super.initState();
+    WidgetsBinding.instance?.addObserver(this);
+    setStatus('Online');
+  }
+
+  void setStatus (String status) async{
+    await FirebaseFirestore.instance.collection('users').doc(user!.uid).update({
+      "status":status,
+    });
+  }
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state){
+    if(state == AppLifecycleState.resumed){
+      setStatus("Online");
+      //online
+    }
+    else{
+      setStatus("Offline");
+      //offline
+    }
+  }
   Widget build(BuildContext context){
     return Scaffold(
       appBar: AppBar(

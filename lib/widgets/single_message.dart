@@ -50,7 +50,9 @@ class SingleMessage extends StatelessWidget {
                             message,
                             fit: BoxFit.cover,
                           )
-                        : const CircularProgressIndicator(),
+                        : Center(
+                          child: CircularProgressIndicator(),
+                        ) ,
                   ),
                 ),
               ),
