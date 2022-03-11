@@ -96,8 +96,25 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                 await FirebaseAuth.instance.signOut();
                 // Navigator.pushNamed(context, '/login');
                 setStatus('Offline');
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => AuthScreen()));
+                Navigator.push(
+                    context,
+                    PageRouteBuilder(
+                        transitionDuration: Duration(seconds: 0),
+                        transitionsBuilder: (BuildContext context,
+                            Animation<double> animation,
+                            Animation<double> secAnimation,
+                            Widget child) {
+                          return ScaleTransition(
+                            scale: animation,
+                            child: child,
+                            alignment: Alignment.center,
+                          );
+                        },
+                        pageBuilder: (BuildContext context,
+                            Animation<double> animation,
+                            Animation<double> secAnimation) {
+                          return AuthScreen();
+                        }));
               },
               icon: const Icon(Icons.logout))
         ],
