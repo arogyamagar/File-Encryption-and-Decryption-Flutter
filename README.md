@@ -1,2 +1,1 @@
-# chat_app
- 
+This app is developed by three members Arogya Thapa Magar. Sahil Ramjali, Saken Rai
