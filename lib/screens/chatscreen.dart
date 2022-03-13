@@ -82,7 +82,7 @@ class ChatScreen extends StatelessWidget {
         body: Column(children: [
           Expanded(
               child: Container(
-            padding: const EdgeInsets.all(10),
+            padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
             child: StreamBuilder(
                 stream: FirebaseFirestore.instance
                     .collection('users')

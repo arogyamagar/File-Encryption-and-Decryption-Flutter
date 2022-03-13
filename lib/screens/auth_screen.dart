@@ -55,12 +55,30 @@ class _AuthScreenState extends State<AuthScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Container(
+            child: Padding(
+      padding: const EdgeInsets.symmetric(
+        vertical: 20,
+      ),
       child: Center(
         child: SingleChildScrollView(
           child: Column(
             children: [
               Padding(
-                padding: EdgeInsets.fromLTRB(10, 50, 10, 10),
+                padding: EdgeInsets.fromLTRB(10, 100, 10, 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    Image(
+                      image: AssetImage(
+                        "assets/images/ic_launcher.png",
+                      ),
+                      height: 200,
+                    )
+                  ],
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
                 child: ElevatedButton(
                   onPressed: () async {
                     await SignInFunction();
@@ -70,7 +88,7 @@ class _AuthScreenState extends State<AuthScreen> {
                     children: [
                       Image.network(
                         'https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/1024px-Google_%22G%22_Logo.svg.png',
-                        height: 36,
+                        height: 25,
                       ),
                       const SizedBox(
                         width: 10,
@@ -93,7 +111,7 @@ class _AuthScreenState extends State<AuthScreen> {
           ),
         ),
       ),
-    ));
+    )));
   }
 }
 

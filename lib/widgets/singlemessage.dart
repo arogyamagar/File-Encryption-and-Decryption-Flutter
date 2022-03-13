@@ -28,7 +28,7 @@ class SingleMessage extends StatelessWidget {
             onDoubleTap: () {},
             child: Container(
                 padding: const EdgeInsets.all(16),
-                margin: const EdgeInsets.all(16),
+                margin: const EdgeInsets.fromLTRB(0, 5, 0, 0),
                 constraints: const BoxConstraints(maxWidth: 200),
                 decoration: BoxDecoration(
                     color: isMe

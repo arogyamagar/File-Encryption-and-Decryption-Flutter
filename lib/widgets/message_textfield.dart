@@ -136,7 +136,7 @@ class _MessageTextFieldState extends State<MessageTextField> {
   Widget build(BuildContext context) {
     return Container(
       // color: Colors.white,
-      padding: const EdgeInsets.fromLTRB(5, 1, 5, 55),
+      padding: const EdgeInsets.fromLTRB(5, 0, 5, 55),
       child: Row(children: [
         Expanded(
             child: TextField(
@@ -146,7 +146,7 @@ class _MessageTextFieldState extends State<MessageTextField> {
               onPressed: () {
                 selectfile();
               },
-              icon: const Icon(Icons.file_present_sharp),
+              icon: const Icon(Icons.attach_file),
               color: Colors.white,
             ),
             labelText: "Enter Message",
@@ -156,17 +156,17 @@ class _MessageTextFieldState extends State<MessageTextField> {
             ),
             border: OutlineInputBorder(
               borderSide: const BorderSide(width: 0),
-              gapPadding: 10,
+              gapPadding: 5,
               borderRadius: BorderRadius.circular(25),
             ),
             enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Color(0xffee122a), width: 1.5),
-              borderRadius: BorderRadius.circular(25),
+              borderSide: BorderSide(color: Color(0xffee122a), width: 1),
+              borderRadius: BorderRadius.circular(20),
             ),
           ),
         )),
         const SizedBox(
-          width: 20,
+          width: 10,
         ),
         GestureDetector(
           onTap: () async {
@@ -223,8 +223,10 @@ class _MessageTextFieldState extends State<MessageTextField> {
               });
               _controller.clear();
             } else {
-              ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Please enter message')));
+              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                  content: Text(
+                'Please enter message',
+              )));
             }
           },
           child: Container(

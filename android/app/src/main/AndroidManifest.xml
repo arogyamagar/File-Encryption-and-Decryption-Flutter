@@ -2,7 +2,7 @@
     package="com.example.chat_app">
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
    <application
-        android:label="chat_app"
+        android:label="ED Warden"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

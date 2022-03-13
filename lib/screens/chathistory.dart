@@ -1,6 +1,6 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:chat_app/models/usermodel.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'chatscreen.dart';
@@ -18,62 +18,77 @@ class ChatHistory extends StatefulWidget {
 class _ChatHistoryState extends State<ChatHistory> {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(3, 30, 3, 0),
-      child: Center(
-        child: StreamBuilder(
-            stream: FirebaseFirestore.instance
-                .collection("users")
-                .orderBy('date')
-                .snapshots(),
-            builder:
-                (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-              if (!snapshot.hasData) {
-                return const Center(
-                  child: CircularProgressIndicator(),
+    return Scaffold(
+      body: StreamBuilder(
+          stream: FirebaseFirestore.instance
+              .collection('users')
+              .doc(widget.user.uid)
+              .collection('messages')
+              .snapshots(),
+          builder: (context, AsyncSnapshot snapshot) {
+            if (snapshot.hasData) {
+              if (snapshot.data.docs.length < 1) {
+                return Center(
+                  child: Text("No Chats Available !"),
                 );
               }
               return ListView.builder(
-                  itemCount: snapshot.data!.docs.length,
-                  physics: const BouncingScrollPhysics(),
+                  itemCount: snapshot.data.docs.length,
                   itemBuilder: (context, index) {
-                    if (snapshot.data!.docs[index]['uid'] !=
-                        FirebaseAuth.instance.currentUser!.uid) {
-                      return ListTile(
-                        leading: ClipRRect(
-                          borderRadius: BorderRadius.circular(80),
-                          child: Image.network(
-                            snapshot.data!.docs[index]['image'],
-                            height: 45,
-                          ),
-                        ),
-                        title: Text(snapshot.data!.docs[index]['name']),
-                        subtitle: Text(snapshot.data!.docs[index]['email']),
-                        trailing: IconButton(
-                            onPressed: () {
+                    var friendId = snapshot.data.docs[index].id;
+                    // var email = snapshot.data.docs[email];
+                    return FutureBuilder(
+                      future: FirebaseFirestore.instance
+                          .collection('users')
+                          .doc(friendId)
+                          .get(),
+                      builder: (context, AsyncSnapshot asyncSnapshot) {
+                        if (asyncSnapshot.hasData) {
+                          var friend = asyncSnapshot.data;
+                          return ListTile(
+                            leading: ClipRRect(
+                              borderRadius: BorderRadius.circular(80),
+                              child: CachedNetworkImage(
+                                imageUrl: friend['image'],
+                                placeholder: (conteext, url) =>
+                                    CircularProgressIndicator(),
+                                errorWidget: (context, url, error) => Icon(
+                                  Icons.error,
+                                ),
+                                height: 50,
+                              ),
+                            ),
+                            title: Text(friend['name']),
+                            subtitle: Container(
+                              child: Text(
+                                friend['email'],
+                                style: TextStyle(color: Colors.grey),
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                            onTap: () {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => ChatScreen(
                                             currentUser: widget.user,
-                                            friendId: snapshot.data!.docs[index]
-                                                ['uid'],
-                                            friendName: snapshot
-                                                .data!.docs[index]['name'],
-                                            friendImage: snapshot
-                                                .data!.docs[index]['image'],
-                                            firendStatus: snapshot
-                                                .data!.docs[index]['status'],
+                                            friendId: friend['uid'],
+                                            friendName: friend['name'],
+                                            friendImage: friend['image'],
+                                            firendStatus: '',
                                           )));
                             },
-                            icon: const Icon(Icons.message)),
-                      );
-                    } else {
-                      return const Text(" ");
-                    }
+                          );
+                        }
+                        return LinearProgressIndicator();
+                      },
+                    );
                   });
-            }),
-      ),
+            }
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }),
     );
   }
 }
