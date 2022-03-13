@@ -8,3 +8,4 @@ This project encrypt and decrypt the files using AES 256 cbc mode.It has two fea
 
 ## Screenshots
 
+![275542341_982353632486895_4477541447894352324_n](https://user-images.githubusercontent.com/33744789/158057771-95d6e055-c1ce-45e5-b81d-adda57cc5ba2.jpg)
