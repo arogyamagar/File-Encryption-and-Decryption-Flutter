@@ -22,4 +22,4 @@ This project encrypt and decrypt the files using AES 256 cbc mode.It has two fea
 <img src="https://user-images.githubusercontent.com/33744789/158057045-762faeec-2738-4526-bbab-852810c99d5d.png" data-canonical-src="https://user-images.githubusercontent.com/33744789/158057045-762faeec-2738-4526-bbab-852810c99d5d.png" width="200" height="400" />
 
 ## Version
-Conpatible with Android version 10 and below
+Conpatible with Android version 10
