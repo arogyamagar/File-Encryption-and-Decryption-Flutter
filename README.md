@@ -11,6 +11,9 @@ This project encrypt and decrypt the files using AES 256 cbc mode.It has two fea
 - Login with google.
 - Chatting features.
 
+## Video
+https://youtu.be/J7sWilYQ-Ls
+
 ## Screenshots
 
 <img src="https://user-images.githubusercontent.com/33744789/158057019-ae27e449-9b01-4440-8270-0a6bd11bf9e4.jpg" data-canonical-src="https://user-images.githubusercontent.com/33744789/158057019-ae27e449-9b01-4440-8270-0a6bd11bf9e4.jpg" width="200" height="400" />
