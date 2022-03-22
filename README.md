@@ -12,7 +12,7 @@ This project encrypt and decrypt the files using AES 256 cbc mode.It has two fea
 - Chatting features.
 
 ## Video
-https://youtu.be/J7sWilYQ-Ls
+https://youtu.be/KEyKj8rf2vE
 
 ## Screenshots
 
